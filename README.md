@@ -58,7 +58,7 @@ Automated builds of the image are available on [Dockerhub](https://hub.docker.co
 Alternatively you can build the image yourself.
 
 ```bash
-docker build -t AmitBarthwal/squid github.com/AmitBarthwal/docker-squid
+docker build -t amitbarthwal/squid github.com/AmitBarthwal/docker-squid
 ```
 
 ## Quickstart
