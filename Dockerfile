@@ -8,45 +8,47 @@ ENV SQUID_VERSION=3.5.27 \
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y squid=${SQUID_VERSION}* \
- && rm -rf /var/lib/apt/lists/* \
- && ./configure --prefix=/usr \
-        --localstatedir=/var \
-        --libexecdir=/usr/lib/squid \
-        --datadir=/usr/share/squid \
-        --sysconfdir=/etc/squid \
-        --with-default-user=proxy \
-        --with-logdir=/var/log/squid \
-        --with-pidfile=/var/run/squid.pid \
-        --mandir=/usr/share/man \
-        --enable-inline \
-        --disable-arch-native \
-        --enable-async-io=8 \
-        --enable-storeio="ufs,aufs,diskd,rock" \
-        --enable-removal-policies="lru,heap" \
-        --enable-delay-pools \
-        --enable-cache-digests \
-        --enable-icap-client \
-        --enable-follow-x-forwarded-for \
-        --enable-auth-basic="DB,fake,getpwnam,LDAP,NCSA,NIS,PAM,POP3,RADIUS,SASL,SMB" \
-        --enable-auth-digest="file,LDAP" \
-        --enable-auth-negotiate="kerberos,wrapper" \
-        --enable-auth-ntlm="fake,SMB_LM" \
-        --enable-external-acl-helpers="file_userip,kerberos_ldap_group,LDAP_group,session,SQL_session,time_quota,unix_group,wbinfo_group" \
-        --enable-url-rewrite-helpers="fake" \
-        --enable-eui \
-        --enable-esi \
-        --enable-icmp \
-        --enable-zph-qos \
-        --enable-ecap \
-        --disable-translation \
-        --with-swapdir=/var/spool/squid \
-        --with-filedescriptors=65536 \
-        --with-large-files \
-        --enable-linux-netfilter \
-        --enable-ssl --enable-ssl-crtd --with-openssl \
- && make -j$(awk '/^processor/{n+=1}END{print n}' /proc/cpuinfo) \
- && checkinstall -y -D --install=no --fstrans=no --requires="${requires}" \
-        --pkgname="squid" 
+ && rm -rf /var/lib/apt/lists/*
+ 
+ 
+RUN cd /src/squid && \
+    ./configure \
+        --prefix=/usr \
+        --datadir=/usr/share/squid4 \
+		--sysconfdir=/etc/squid4 \
+		--localstatedir=/var \
+		--mandir=/usr/share/man \
+		--enable-inline \
+		--enable-async-io=8 \
+		--enable-storeio="ufs,aufs,diskd,rock" \
+		--enable-removal-policies="lru,heap" \
+		--enable-delay-pools \
+		--enable-cache-digests \
+		--enable-underscores \
+		--enable-icap-client \
+		--enable-follow-x-forwarded-for \
+		--enable-auth-basic="DB,fake,getpwnam,LDAP,NCSA,NIS,PAM,POP3,RADIUS,SASL,SMB" \
+		--enable-auth-digest="file,LDAP" \
+		--enable-auth-negotiate="kerberos,wrapper" \
+		--enable-auth-ntlm="fake" \
+		--enable-external-acl-helpers="file_userip,kerberos_ldap_group,LDAP_group,session,SQL_session,unix_group,wbinfo_group" \
+		--enable-url-rewrite-helpers="fake" \
+		--enable-eui \
+		--enable-esi \
+		--enable-icmp \
+		--enable-zph-qos \
+		--with-openssl \
+		--enable-ssl \
+		--enable-ssl-crtd \ 
+		--disable-translation \
+		--with-swapdir=/var/spool/squid4 \
+		--with-logdir=/var/log/squid4 \
+		--with-pidfile=/var/run/squid4.pid \
+		--with-filedescriptors=65536 \
+		--with-large-files \
+		--with-default-user=proxy \
+        --disable-arch-native
+
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
