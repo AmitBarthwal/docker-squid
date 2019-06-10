@@ -11,9 +11,8 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
  
  
-RUN ./configure \
-    --with-openssl \
-    --enable-ssl-crtd
+RUN set -ex \
+    && ./configure --with-openssl --enable-ssl-crtd
        
 
 COPY entrypoint.sh /sbin/entrypoint.sh
