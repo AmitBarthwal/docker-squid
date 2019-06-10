@@ -11,8 +11,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
  
  
-RUN cd /src/squid && \
-    ./configure \
+RUN ./configure \
         --prefix=/usr \
         --datadir=/usr/share/squid4 \
 		--sysconfdir=/etc/squid4 \
