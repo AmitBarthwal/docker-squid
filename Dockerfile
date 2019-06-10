@@ -11,7 +11,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
  
  
-RUN pwd \
+RUN ls -a \
     && ./configure --with-openssl --enable-ssl-crtd
        
 
