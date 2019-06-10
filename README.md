@@ -2,6 +2,8 @@
 
 # AmitBarthwal/squid:3.5.27-1
 
+This file is forked from https://github.com/sameersbn/docker-squid
+
 - [Introduction](#introduction)
   - [Contributing](#contributing)
   - [Issues](#issues)
