@@ -1,6 +1,6 @@
 [![Circle CI](https://circleci.com/gh/sameersbn/docker-squid.svg?style=shield)](https://circleci.com/gh/sameersbn/docker-squid) [![Docker Repository on Quay.io](https://quay.io/repository/sameersbn/squid/status "Docker Repository on Quay.io")](https://quay.io/repository/sameersbn/squid)
 
-# sameersbn/squid:3.5.27-1
+# AmitBarthwal/squid:3.5.27-1
 
 - [Introduction](#introduction)
   - [Contributing](#contributing)
@@ -52,13 +52,13 @@ Automated builds of the image are available on [Dockerhub](https://hub.docker.co
 > **Note**: Builds are also available on [Quay.io](https://quay.io/repository/sameersbn/squid)
 
 ```bash
-docker pull sameersbn/squid:3.5.27-1
+docker pull AmitBarthwal/squid:3.5.27-1
 ```
 
 Alternatively you can build the image yourself.
 
 ```bash
-docker build -t sameersbn/squid github.com/sameersbn/docker-squid
+docker build -t AmitBarthwal/squid github.com/AmitBarthwal/docker-squid
 ```
 
 ## Quickstart
@@ -69,7 +69,7 @@ Start Squid using:
 docker run --name squid -d --restart=always \
   --publish 3128:3128 \
   --volume /srv/docker/squid/cache:/var/spool/squid \
-  sameersbn/squid:3.5.27-1
+  AmitBarthwal/squid:3.5.27-1
 ```
 
 *Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml) file to start the container using [Docker Compose](https://docs.docker.com/compose/)*
