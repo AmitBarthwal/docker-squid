@@ -52,7 +52,7 @@ Automated builds of the image are available on [Dockerhub](https://hub.docker.co
 > **Note**: Builds are also available on [Quay.io](https://quay.io/repository/sameersbn/squid)
 
 ```bash
-docker pull AmitBarthwal/squid:3.5.27-1
+###docker pull AmitBarthwal/squid:3.5.27-1
 ```
 
 Alternatively you can build the image yourself.
