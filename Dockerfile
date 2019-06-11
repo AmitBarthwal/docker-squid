@@ -6,13 +6,17 @@ ENV SQUID_VERSION=3.5.27 \
     SQUID_LOG_DIR=/var/log/squid \
     SQUID_USER=proxy
 
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y squid=${SQUID_VERSION}* \
- && rm -rf /var/lib/apt/lists/*
- 
- 
-RUN ./configure --with-openssl --enable-ssl-crtd
-       
+RUN apt-get update && \
+    apt-get -qq -y install openssl libssl1.0-dev build-essential wget curl net-tools dnsutils tcpdump && \
+    apt-get clean
+
+# squid 3.5.27
+RUN wget http://www.squid-cache.org/Versions/v3/3.5/squid-3.5.27.tar.gz && \
+    tar xzvf squid-3.5.27.tar.gz && \
+    cd squid-3.5.27 && \
+    ./configure --prefix=$SQUID_DIR --enable-ssl --with-openssl --enable-ssl-crtd --with-large-files --enable-auth && \
+    make -j4 && \
+    make install
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
